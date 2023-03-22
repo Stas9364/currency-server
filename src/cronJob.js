@@ -10,21 +10,36 @@ import alfaData from "./banks/alfa.js";
 
 import * as request from "./requests.js";
 
-export default function getAllCurrency() {
-    const requests = [request.rrbCurrency(), request.dabrabytCurrency(), request.belarusBCurrency()];
+function getAllCurrency() {
+    // const requests = [request.rrbCurrency(), request.dabrabytCurrency(), request.belarusBCurrency()];
 
-    Promise.all(requests).then(([rrb, dabrabyt, belarusB, vtb, absolut, , alfa]) => {
-        const result = {
-            rrb: rrbData(rrb),
-            belarus: belarusBData(belarusB),
-            dabrabyt: dabrabytData(dabrabyt)
-        };
-
-        redisSetter(result);
-    });
+    // Promise.all(requests)
+    //     .then(([rrb, dabrabyt, belarusB, vtb, absolut, alfa]) => {
+    //         const result = {
+    //             rrb: rrbData(rrb),
+    //             belarus: belarusBData(belarusB),
+    //             dabrabyt: dabrabytData(dabrabyt)
+    //         };
+    currencyRequest().then(res => redisSetter(res))
+    // redisSetter();
+    //     });
 }
 
 // cron.schedule("*/1 * * * * * ", () => {
 //     console.log(999)
-//     getAllCurrency()
+// getAllCurrency()
 // })
+
+export default async function currencyRequest(departments) {
+    
+    const requests = [request.rrbCurrency(), request.dabrabytCurrency(), request.belarusBCurrency()];
+
+    return Promise.all(requests)
+        .then(([rrb, dabrabyt, belarusB, vtb, absolut, alfa]) => {
+            return {
+                rrb: rrbData(rrb),
+                // belarus: belarusBData(belarusB),
+                dabrabyt: dabrabytData(dabrabyt)
+            };
+        });
+}
