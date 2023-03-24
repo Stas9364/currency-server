@@ -1,9 +1,9 @@
 class CurrencyData {
-    constructor(id, city, address, elem) {
+    constructor(id, city, address, rates) {
         this.id = id;
         this.city = city;
         this.address = address;
-        this.rates = elem;
+        this.rates = rates;
 
     }
 }

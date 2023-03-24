@@ -9,8 +9,7 @@ const absolut = 'https://absolutbank.by/exchange-rates.xml';
 const dabrabyt = 'https://bankdabrabyt.by/export_courses.php';
 const belarusB = 'https://belarusbank.by/api/kursExchange';
 const alfa = 'https://developerhub.alfabank.by:8273/partner/1.0.0/public/rates';
-// const belapb = 'https://belapb.by/CashExRatesDaily.php';
-const belapb = 'https://belapb.by/ExBanks.php';
+const belapb = 'https://belapb.by/CashExRatesDaily.php';
 
 export async function rrbCurrency() {
     try {
