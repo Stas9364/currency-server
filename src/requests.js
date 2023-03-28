@@ -9,7 +9,11 @@ const absolut = 'https://absolutbank.by/exchange-rates.xml';
 const dabrabyt = 'https://bankdabrabyt.by/export_courses.php';
 const belarusB = 'https://belarusbank.by/api/kursExchange';
 const alfa = 'https://developerhub.alfabank.by:8273/partner/1.0.0/public/rates';
-const belapb = 'https://belapb.by/CashExRatesDaily.php';
+const belapb = {
+    currency: 'https://belapb.by/CashExRatesDaily.php',
+    departments: 'https://belapb.by/ExBanks.php'
+};
+const paitet = 'https://www.paritetbank.by/api/v3/branches/';
 
 export async function rrbCurrency() {
     try {
@@ -72,9 +76,29 @@ export async function alfaCurrency() {
 
 export async function belapbCurrency() {
     try {
-        const req = await fetch(belapb);
-        const exchangeRatesXML = await req.text();
-        return await parser.parseStringPromise(exchangeRatesXML);
+        const reqCurr = await fetch(belapb.currency);
+        const exchangeRatesXMLCurr = await reqCurr.text();
+        const currencies = await parser.parseStringPromise(exchangeRatesXMLCurr); //currency JSON
+
+        const reqDep = await fetch(belapb.departments);
+        const exchangeRatesXMLDep = await reqDep.text();
+        const departments = await parser.parseStringPromise(exchangeRatesXMLDep); //departments JSON
+
+        const filteredDepartments =
+            departments.ExBanksList.Bank.filter(el => {
+                return el.BankType[0] === 'Точки продаж';
+            });
+
+        return { currencies, filteredDepartments };
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export async function paritetCurrency() {
+    try {
+        const req = await fetch(paitet);
+        return await req.json();
     } catch (e) {
         console.log(e);
     }

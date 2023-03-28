@@ -14,6 +14,8 @@ export async function redisSetter(date) {
     await client.get('currency');
 
     await client.disconnect();
+
+    console.log('Data is set!')
 }
 
 export async function redisGetter() {

@@ -1,17 +1,17 @@
 import CurrencyData from "../models/currencyDataModel.js";
 import RateData from "../models/rateDataModel.js";
 
-export default function belapbData(data, departments) {
+export default function belapbData(data) {
     const arr = [];
     const bankId = new Set();
     const rates = {}
-    data.DailyExRates.Currency.forEach(el => bankId.add(el.BankId[0]));
+    data.currencies.DailyExRates.Currency.forEach(el => bankId.add(el.BankId[0]));
 
     [...bankId].forEach(id => {
         const departmentCurrency = {};
         const currencyRate = [];
 
-        data.DailyExRates.Currency.forEach(el => {
+        data.currencies.DailyExRates.Currency.forEach(el => {
             if (id === el.BankId[0]) {
                 currencyRate.push(
                     new RateData(
@@ -26,7 +26,7 @@ export default function belapbData(data, departments) {
         rates[id] = currencyRate;
     })
 
-    return bindtDepartmentsToCurrency(rates, departments)
+    return bindtDepartmentsToCurrency(rates, data.filteredDepartments)
 }
 
 function bindtDepartmentsToCurrency(rates, departments) {
@@ -46,7 +46,7 @@ function bindtDepartmentsToCurrency(rates, departments) {
             }
         })
     }
-    console.log('done ')
+
     return arr;
 }
 

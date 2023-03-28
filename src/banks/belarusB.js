@@ -16,7 +16,7 @@ export default function belarusBData(data) {
             new RateData('GBP', el.GBP_in, el.GPB_out, 1),
             new RateData('CAD', el.CAD_in, el.CAD_out, 1),
             new RateData('CZK', el.CZK_in, el.CZK_out, 100),
-            new RateData('JPY', el.JPY_in, el.JPY_out, 1),
+            new RateData('JPY', el.JPY_in, el.JPY_out, 100),
             new RateData('SEK', el.SEK_in, el.SEK_out, 10),
             new RateData('CHF', el.CHF_in, el.CHF_out, 1),
         ];
