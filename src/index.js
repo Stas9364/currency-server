@@ -29,8 +29,7 @@ app.get('/', async (req, res) => {
 
     const value = await redisGetter();
 
-    res.send(getCurrencyByCity(value, 'Солигорск'));
-
+    res.send(getCurrencyByCity(value, 'Минск'));
 
     // initialRequest()
 });

@@ -7,33 +7,62 @@ export default function dabrabytData(data) {
 
     for (let i = 0; i < filial.length - 1; i++) {
         const ratesArray = [];
+        const ratesObj = {};
         for (let k = 0; k < filial[i].rates[0].value.length; k++) {
-            ratesArray.push(
-                {
+            // ratesArray.push(
+            //     {
+            //         ...filial[i].rates[0].value[k]['$'],
+            //         buy:
+            //             filial[i].rates[0].value[k]['$'].iso === 'RUB' || 
+            //             filial[i].rates[0].value[k]['$'].iso === 'UAH'
+            //                 ? (filial[i].rates[0].value[k]['$'].buy * 100).toFixed(4)
+            //                 : filial[i].rates[0].value[k]['$'].buy,
+            //         sale:
+            //             filial[i].rates[0].value[k]['$'].iso === 'RUB' || 
+            //             filial[i].rates[0].value[k]['$'].iso === 'UAH'
+            //                 ? (filial[i].rates[0].value[k]['$'].sale * 100).toFixed(4)
+            //                 : filial[i].rates[0].value[k]['$'].sale,
+            //         scale:
+            //             filial[i].rates[0].value[k]['$'].iso === 'RUB' || 
+            //             filial[i].rates[0].value[k]['$'].iso === 'UAH'
+            //                 ? 100
+            //                 : 1
+            //     });
+            const currencyAbbreviation = filial[i].rates[0].value[k]['$'].iso;
+            const buyRate = filial[i].rates[0].value[k]['$'].buy;
+            const saleRate = filial[i].rates[0].value[k]['$'].sale;  
+
+            if (currencyAbbreviation === 'USD'
+                || currencyAbbreviation === 'EUR'
+                || currencyAbbreviation === 'RUB'
+                || currencyAbbreviation === 'UAH'
+            ) {
+                ratesObj[currencyAbbreviation] = {
                     ...filial[i].rates[0].value[k]['$'],
                     buy:
-                        filial[i].rates[0].value[k]['$'].iso === 'RUB' || 
-                        filial[i].rates[0].value[k]['$'].iso === 'UAH'
-                            ? (filial[i].rates[0].value[k]['$'].buy * 100).toFixed(4)
-                            : filial[i].rates[0].value[k]['$'].buy,
+                        currencyAbbreviation === 'RUB'
+                            || currencyAbbreviation === 'UAH'
+                            ? (buyRate * 100).toFixed(4)
+                            : buyRate,
                     sale:
-                        filial[i].rates[0].value[k]['$'].iso === 'RUB' || 
-                        filial[i].rates[0].value[k]['$'].iso === 'UAH'
-                            ? (filial[i].rates[0].value[k]['$'].sale * 100).toFixed(4)
-                            : filial[i].rates[0].value[k]['$'].sale,
+                        currencyAbbreviation === 'RUB'
+                            || currencyAbbreviation === 'UAH'
+                            ? (saleRate * 100).toFixed(4)
+                            : saleRate,
                     scale:
-                        filial[i].rates[0].value[k]['$'].iso === 'RUB' || 
-                        filial[i].rates[0].value[k]['$'].iso === 'UAH'
+                        currencyAbbreviation === 'RUB'
+                            || currencyAbbreviation === 'UAH'
                             ? 100
                             : 1
-                });
+                }
+            }
         }
 
         arr.push(new CurrencyData(
             filial[i].id[0],
             filial[i].city[0],
             filial[i].address[0],
-            ratesArray
+            ratesObj
         ));
     }
 
