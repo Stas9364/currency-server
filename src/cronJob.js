@@ -9,6 +9,7 @@ import vtbData from "./banks/vtb.js";
 import alfaData from "./banks/alfa.js";
 import belapbData from "./banks/belapb.js";
 import paritetData from "./banks/paritet.js";
+import bnbData from "./banks/bnb.js";
 
 import * as request from "./requests.js";
 
@@ -16,32 +17,34 @@ function getAllCurrency() {
     currencyRequest().then(res => redisSetter(res))
 }
 
-// cron.schedule("*/1 * * * * * ", () => {
+// cron.schedule("*/2 * * * * ", () => {
 //     console.log(999)
-// getAllCurrency()
+//     currencyRequest()
 // })
 
-export default async function currencyRequest(departments) {
+export default async function currencyRequest() {
 
     const requests = [
         request.belapbCurrency(),
         request.rrbCurrency(),
         request.dabrabytCurrency(),
         request.belarusBCurrency(),
-        request.paritetCurrency()
+        request.paritetCurrency(),
+        request.bnbCurrency()
     ];
 
     Promise.all(requests)
-        .then(([belapb, rrb, dabrabyt, belarusB, paritet, vtb, absolut, alfa]) => {
+        .then(([belapb, rrb, dabrabyt, belarusB, paritet, bnb, vtb, absolut, alfa]) => {
 
             const result = {
                 belapb: belapbData(belapb),
                 rrb: rrbData(rrb),
                 belarus: belarusBData(belarusB),
                 dabrabyt: dabrabytData(dabrabyt),
-                paritet: paritetData(paritet)
+                paritet: paritetData(paritet),
+                bnb: bnbData(bnb)
             };
-            
+
             redisSetter(result)
         });
 }

@@ -14,6 +14,7 @@ const belapb = {
     departments: 'https://belapb.by/ExBanks.php'
 };
 const paitet = 'https://www.paritetbank.by/api/v3/branches/';
+const bnb = 'https://bnb-api.bnb.by/api/v1/info/full/';
 
 export async function rrbCurrency() {
     try {
@@ -98,6 +99,15 @@ export async function belapbCurrency() {
 export async function paritetCurrency() {
     try {
         const req = await fetch(paitet);
+        return await req.json();
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export async function bnbCurrency() {
+    try {
+        const req = await fetch(bnb);
         return await req.json();
     } catch (e) {
         console.log(e);

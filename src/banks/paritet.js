@@ -16,13 +16,6 @@ export default function paritetData(data) {
 
         el.Services.CurrencyExchange.forEach(el => {
             if (el.ExchangeType === 'Cash' && el.Terms.Term.TargetCurrency === 'BYN') {
-                // rates.push(new RateData(
-                //     el.Terms.Term.SourceCurrency,
-                //     el.Terms.Term.Direction.buy,
-                //     el.Terms.Term.Direction.sell,
-                //     el.Terms.Term.Scale
-                // ));
-
                 ratesObj[el.Terms.Term.SourceCurrency] = new RateData(
                     el.Terms.Term.SourceCurrency,
                     el.Terms.Term.Direction.buy,

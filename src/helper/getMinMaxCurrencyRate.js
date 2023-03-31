@@ -2,9 +2,6 @@ export default function getMiniMaxabbreviationencyRate(data) {
 
     return {
         ...usdData(data)
-        //  eurFunction(data),
-        //  rubFunction(data)
-        //  ...
     }
 }
 
@@ -82,24 +79,30 @@ function usdData(data) {
             minSale: 100,
             maxRates: [],
             minRates: [],
-        }
+        },
+        'GEL': {
+            maxBuy: 0,
+            minSale: 100,
+            maxRates: [],
+            minRates: [],
+        },
     };
 
     ((data) => {
         for (let key in data) {
             data[key].forEach((el) => {
-                for( let abbreviation in el.rates ) {
+                for (let abbreviation in el.rates) {
 
                     const buyRate = el.rates[abbreviation].buy;
                     let maxBuyRate = minMaxRates[abbreviation].maxBuy;
-                    const minMaxRatesArr = minMaxRates[abbreviation].maxRates;
+                    const maxRatesArr = minMaxRates[abbreviation].maxRates;
 
-                    if ( Number(buyRate) >= Number(maxBuyRate) ) {
+                    if (Number(buyRate) >= Number(maxBuyRate)) {
                         minMaxRates[abbreviation].maxBuy = buyRate;
-                        minMaxRatesArr.push({ ...el, bank: key });
-    
-                        if ( Number(minMaxRatesArr[0].rates[abbreviation].buy) < Number(buyRate) ) {
-                            minMaxRatesArr.splice(0, minMaxRatesArr.length - 1);
+                        maxRatesArr.push({ ...el, bank: key });
+
+                        if (Number(maxRatesArr[0].rates[abbreviation].buy) < Number(buyRate)) {
+                            maxRatesArr.splice(0, maxRatesArr.length - 1);
                         }
                     }
                 }
@@ -110,18 +113,18 @@ function usdData(data) {
     ((data) => {
         for (let key in data) {
             data[key].forEach((el) => {
-                for( let abbreviation in el.rates ) {
+                for (let abbreviation in el.rates) {
 
                     const saleRate = el.rates[abbreviation].sale;
                     const minSaleRate = minMaxRates[abbreviation].minSale;
-                    const minMaxRatesArr = minMaxRates[abbreviation].minRates;
+                    const minRatesArr = minMaxRates[abbreviation].minRates;
 
-                    if ( Number(saleRate) <= Number(minSaleRate) && Number(saleRate) > 0 ) {
+                    if (Number(saleRate) <= Number(minSaleRate) && Number(saleRate) > 0) {
                         minMaxRates[abbreviation].minSale = saleRate;
-                        minMaxRates[abbreviation].minRates.push({ ...el, bank: key });
-    
-                        if ( Number(minMaxRatesArr[0].rates[abbreviation].sale) > Number(saleRate) ) {
-                            minMaxRatesArr.splice(0, minMaxRatesArr.length - 1);
+                        minRatesArr.push({ ...el, bank: key });
+
+                        if (Number(minRatesArr[0].rates[abbreviation].sale) > Number(saleRate)) {
+                            minRatesArr.splice(0, minRatesArr.length - 1);
                         }
                     }
                 }

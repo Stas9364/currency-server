@@ -11,7 +11,6 @@ export default function rrbData(data) {
             if (element.rates[0].value[k]['$'].iso === 'date') {
                 continue;
             }
-            // ratesArray.push(element.rates[0].value[k]['$']);
             ratesObj[element.rates[0].value[k]['$'].iso] = element.rates[0].value[k]['$'];
         }
 

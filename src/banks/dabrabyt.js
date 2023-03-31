@@ -9,25 +9,7 @@ export default function dabrabytData(data) {
         const ratesArray = [];
         const ratesObj = {};
         for (let k = 0; k < filial[i].rates[0].value.length; k++) {
-            // ratesArray.push(
-            //     {
-            //         ...filial[i].rates[0].value[k]['$'],
-            //         buy:
-            //             filial[i].rates[0].value[k]['$'].iso === 'RUB' || 
-            //             filial[i].rates[0].value[k]['$'].iso === 'UAH'
-            //                 ? (filial[i].rates[0].value[k]['$'].buy * 100).toFixed(4)
-            //                 : filial[i].rates[0].value[k]['$'].buy,
-            //         sale:
-            //             filial[i].rates[0].value[k]['$'].iso === 'RUB' || 
-            //             filial[i].rates[0].value[k]['$'].iso === 'UAH'
-            //                 ? (filial[i].rates[0].value[k]['$'].sale * 100).toFixed(4)
-            //                 : filial[i].rates[0].value[k]['$'].sale,
-            //         scale:
-            //             filial[i].rates[0].value[k]['$'].iso === 'RUB' || 
-            //             filial[i].rates[0].value[k]['$'].iso === 'UAH'
-            //                 ? 100
-            //                 : 1
-            //     });
+
             const currencyAbbreviation = filial[i].rates[0].value[k]['$'].iso;
             const buyRate = filial[i].rates[0].value[k]['$'].buy;
             const saleRate = filial[i].rates[0].value[k]['$'].sale;  

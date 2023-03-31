@@ -1,8 +1,8 @@
 export default class RateData {
-    constructor(iso, buy, sell, scale) {
+    constructor(iso, buy, sale, scale) {
         this.iso = iso;
         this.buy = buy;
-        this.sale = sell;
+        this.sale = sale;
         this.scale = scale;
     }
 }

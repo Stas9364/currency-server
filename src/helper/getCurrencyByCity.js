@@ -9,7 +9,5 @@ export default function getCurrencyByCity(data, city) {
         obj[key] = banks[key]
             .filter(el => el.city.replace(/ё/g, 'е') === city);
     }
-    return { ...obj, minMaxRate: getMiniMaxCurrencyRate(obj) }
-    // return getMiniMaxCurrencyRate(obj)
-    // return obj
+    return { ...obj, minMaxRate: getMiniMaxCurrencyRate(obj) };
 }

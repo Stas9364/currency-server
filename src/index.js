@@ -29,11 +29,20 @@ app.get('/', async (req, res) => {
 
     const value = await redisGetter();
 
-    res.send(getCurrencyByCity(value, 'Минск'));
+    if (Object.keys(value).length !== 0) {
+        res
+            .status(200)
+            .send(getCurrencyByCity(value, 'Минск'));
+    } else {
+        res
+            .status(500)
+            .json({ error: { message: 'Courses have not been received yet!' } });
+    }
+
 
     // initialRequest()
-});
 
+});
 
 app.listen(PORT, () => {
     console.log(`Server has been started on port ${PORT}`);
@@ -41,5 +50,11 @@ app.listen(PORT, () => {
 
 
 function initialRequest() {
+    // currencyRequest();
+}
+
+if (!await redisGetter()) {
+    console.log('Send request for courses')
     currencyRequest();
 }
+
