@@ -10,6 +10,7 @@ export default function alfaData(data, city) {
         }
     });
 
-    return [new CurrencyData('1', 'Минск', 'ул. Сурганова, 43', rates)].filter(el => el.city === city);
+
+    return [new CurrencyData('Альфа Банк', '1', 'Минск', 'ул. Сурганова, 43', rates)];
 
 }

@@ -97,7 +97,7 @@ function usdData(data) {
                     let maxBuyRate = minMaxRates[abbreviation].maxBuy;
                     const maxRatesArr = minMaxRates[abbreviation].maxRates;
 
-                    if (Number(buyRate) >= Number(maxBuyRate)) {
+                    if ((Number(buyRate) >= Number(maxBuyRate)) && Number(buyRate) !== 0) {
                         minMaxRates[abbreviation].maxBuy = buyRate;
                         maxRatesArr.push({ ...el, bank: key });
 

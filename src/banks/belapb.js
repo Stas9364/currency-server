@@ -8,8 +8,6 @@ export default function belapbData(data) {
     data.currencies.DailyExRates.Currency.forEach(el => bankId.add(el.BankId[0]));
 
     [...bankId].forEach(id => {
-        const departmentCurrency = {};
-        const currencyRate = [];
         const currencyRateObj = {};
 
         data.currencies.DailyExRates.Currency.forEach(el => {
@@ -37,6 +35,7 @@ function bindtDepartmentsToCurrency(rates, departments) {
             if (key === dep['$'].Id) {
                 arr.push(
                     new CurrencyData(
+                        'Белагропромбанк',
                         dep['$'].Id,
                         dep['CityTitleRu'][0],
                         dep['BankAddressRu'][0],

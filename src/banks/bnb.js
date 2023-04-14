@@ -10,7 +10,7 @@ export default function bnbData(data) {
         const currenciesData = data[key].currency;
 
         if (info.id !== '373' && info.id !== '170') {
-            arr.push(new CurrencyData(info.id, info.city, info.address, ratesObj));
+            arr.push(new CurrencyData('БНБ-Банк', info.id, info.city, info.address, ratesObj));
 
             currenciesData.forEach(el => {
                 if (el.type_code === '00' && el.count_in === 'BYN')

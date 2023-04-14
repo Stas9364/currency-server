@@ -41,6 +41,7 @@ export default function dabrabytData(data) {
         }
 
         arr.push(new CurrencyData(
+            'Банк Дабрабыт',
             filial[i].id[0],
             filial[i].city[0],
             filial[i].address[0],

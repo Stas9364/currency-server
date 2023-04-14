@@ -10,6 +10,7 @@ import alfaData from "./banks/alfa.js";
 import belapbData from "./banks/belapb.js";
 import paritetData from "./banks/paritet.js";
 import bnbData from "./banks/bnb.js";
+import technoData from "./banks/techno.js";
 
 import * as request from "./requests.js";
 
@@ -30,11 +31,12 @@ export default async function currencyRequest() {
         request.dabrabytCurrency(),
         request.belarusBCurrency(),
         request.paritetCurrency(),
-        request.bnbCurrency()
+        request.bnbCurrency(),
+        request.technoCurrency()
     ];
 
     Promise.all(requests)
-        .then(([belapb, rrb, dabrabyt, belarusB, paritet, bnb, vtb, absolut, alfa]) => {
+        .then(([belapb, rrb, dabrabyt, belarusB, paritet, bnb, techno, vtb, absolut, alfa]) => {
 
             const result = {
                 belapb: belapbData(belapb),
@@ -42,7 +44,8 @@ export default async function currencyRequest() {
                 belarus: belarusBData(belarusB),
                 dabrabyt: dabrabytData(dabrabyt),
                 paritet: paritetData(paritet),
-                bnb: bnbData(bnb)
+                bnb: bnbData(bnb),
+                techno: technoData(techno)
             };
 
             redisSetter(result)

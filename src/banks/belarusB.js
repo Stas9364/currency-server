@@ -21,7 +21,7 @@ export default function belarusBData(data) {
             'CHF': new RateData('CHF', el.CHF_in, el.CHF_out, 1),
         }
 
-        arr.push(new CurrencyData(el.filial_id, el.name, address, ratesObj));
+        arr.push(new CurrencyData('Беларусбанк', el.filial_id, el.name, address, ratesObj));
     });
 
     return arr;

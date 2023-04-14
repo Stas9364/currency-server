@@ -1,5 +1,6 @@
 class CurrencyData {
-    constructor(id, city, address, rates) {
+    constructor(bankName, id, city, address, rates) {
+        this.bankName = bankName;
         this.id = id;
         this.city = city;
         this.address = address;

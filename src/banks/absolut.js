@@ -10,7 +10,7 @@ export default function absolutData(data, city) {
         for (let i = 0; i < element.rate.length - 6; i++) {
             ratesArr.push(new RateData(element.rate[i]['$'].currency, element.rate[i]['buy'][0], element.rate[i]['sell'][0], 1));
         }
-        arr.push(new CurrencyData(element['$'].id, 'Минск', element['$'].name, ratesArr));
+        arr.push(new CurrencyData('ОптиКурс НКФО', element['$'].id, 'Минск', element['$'].name, ratesArr));
     });
 
     return arr.filter(el => el.city === city);

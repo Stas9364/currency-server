@@ -15,6 +15,17 @@ const belapb = {
 };
 const paitet = 'https://www.paritetbank.by/api/v3/branches/';
 const bnb = 'https://bnb-api.bnb.by/api/v1/info/full/';
+const techno = 'https://tb.by/mob_courses.php';
+
+export async function technoCurrency() {
+    try {
+        const req = await fetch(techno);
+        const exchangeRatesXML = await req.text();
+        return await parser.parseStringPromise(exchangeRatesXML);
+    } catch (e) {
+        console.log(e);
+    }
+}
 
 export async function rrbCurrency() {
     try {

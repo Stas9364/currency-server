@@ -10,8 +10,7 @@ export async function redisSetter(date) {
     await client.connect();
 
     await client.set('currency', JSON.stringify(date));
-
-    await client.get('currency');
+    await client.set('updateDate', JSON.stringify({updateDate: new Date().toLocaleString()}));
 
     await client.disconnect();
 
@@ -21,9 +20,10 @@ export async function redisSetter(date) {
 export async function redisGetter() {
     await client.connect();
 
-    const value = await client.get('currency');
+    const currency = await client.get('currency');
+    const updateDate = await client.get('updateDate');
     
     await client.disconnect();
 
-    return value;
+    return currency;
 }
