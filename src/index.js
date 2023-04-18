@@ -47,6 +47,7 @@ app.listen(PORT, () => {
 });
 
 
+
 if (!await redisGetter()) {
     console.log('Send request for courses')
     currencyRequest();
