@@ -1,22 +1,18 @@
 import cron from "node-cron";
 
-import { redisSetter } from "./redis/redisDB.js";
-import rrbData from "./banks/rrb.js";
-import absolutData from "./banks/absolut.js";
-import dabrabytData from "./banks/dabrabyt.js";
-import belarusBData from "./banks/belarusB.js";
-import vtbData from "./banks/vtb.js";
-import alfaData from "./banks/alfa.js";
-import belapbData from "./banks/belapb.js";
-import paritetData from "./banks/paritet.js";
-import bnbData from "./banks/bnb.js";
-import technoData from "./banks/techno.js";
+import { redisSetter } from "../state/redis-db.js";
+import rrbData from "../services/rrb.js";
+import absolutData from "../services/absolut.js";
+import dabrabytData from "../services/dabrabyt.js";
+import belarusBData from "../services/belarusB.js";
+import vtbData from "../services/vtb.js";
+import alfaData from "../services/alfa.js";
+import belapbData from "../services/belapb.js";
+import paritetData from "../services/paritet.js";
+import bnbData from "../services/bnb.js";
+import technoData from "../services/techno.js";
 
-import * as request from "./requests.js";
-
-function getAllCurrency() {
-    currencyRequest().then(res => redisSetter(res))
-}
+import * as request from "../bank-data-requests.js";
 
 // cron.schedule("*/2 * * * * ", () => {
 //     console.log(999)

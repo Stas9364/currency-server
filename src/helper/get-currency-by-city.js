@@ -1,4 +1,4 @@
-import getMiniMaxCurrencyRate from "./getMinMaxCurrencyRate.js";
+import getMiniMaxCurrencyRate from "./get-min-max-currency-rate.js";
 
 export default function getCurrencyByCity(data, city) {
     const banks = JSON.parse(data);

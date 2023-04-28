@@ -1,5 +1,5 @@
-import CurrencyData from "../models/currencyDataModel.js";
-import RateData from "../models/rateDataModel.js";
+import CurrencyData from "../bank-data-stucture/currency-data-model.js";
+import RateData from "../bank-data-stucture/rate-data-model.js";
 
 export default function paritetData(data) {
     const arr = [];
