@@ -8,15 +8,21 @@ import fetch from "node-fetch";
 import xml2js from "xml2js";
 const parser = new xml2js.Parser();
 
-import './cronJob.js';
-import currencyRequest from "./cronJob.js";
-import { redisGetter } from "./redis/redisDB.js";
-import getCurrencyByCity from "./helper/getCurrencyByCity.js";
-import CurrencyData from "./models/currencyDataModel.js";
-import RateData from "./models/rateDataModel.js";
-import paritetData from "./banks/paritet.js";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-import * as requests from "./requests.js";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+import './controller/currency.controller.js';
+import currencyRequest from "./controller/currency.controller.js";
+import { redisGetter } from "./state/redis-db.js";
+import getCurrencyByCity from "./helper/get-currency-by-city.js";
+import CurrencyData from "./bank-data-stucture/currency-data-model.js";
+import RateData from "./bank-data-stucture/rate-data-model.js";
+import paritetData from "./services/paritet.js";
+
+import * as requests from "./bank-data-requests.js";
 
 const PORT = process.env.PORT || 3005;
 
@@ -32,7 +38,7 @@ app.get('/', async (req, res) => {
     if (Object.keys(value).length !== 0) {
         res
             .status(202)
-            .send(getCurrencyByCity(value, 'Могилев'));
+            .send(getCurrencyByCity(value, city));
     } else {
         res
             .status(500)

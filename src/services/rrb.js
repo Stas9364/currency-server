@@ -1,4 +1,4 @@
-import CurrencyData from "../models/currencyDataModel.js";
+import CurrencyData from "../bank-data-stucture/currency-data-model.js";
 
 export default function rrbData(data) {
     const arr = [];
