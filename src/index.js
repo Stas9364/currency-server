@@ -46,6 +46,7 @@ app.get('/', async (req, res) => {
     }
 
     // currencyRequest()
+
 });
 
 app.listen(PORT, () => {

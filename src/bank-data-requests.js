@@ -3,6 +3,8 @@ import fetch from "node-fetch";
 import xml2js from "xml2js";
 const parser = new xml2js.Parser();
 
+import iconv from "iconv-lite";
+
 const rrb = 'https://www.rrb.by/export/get-currency';
 const vtb = 'https://www.vtb.by/sites/default/files/rates.xml';
 const absolut = 'https://absolutbank.by/exchange-rates.xml';
@@ -71,7 +73,7 @@ export async function belarusBCurrency(city) {
     try {
         const req = await fetch(belarusB);
         const result = await req.json();
-        return await { result };
+        return { result };
     } catch (e) {
         console.log(e);
     }
@@ -120,6 +122,18 @@ export async function bnbCurrency() {
     try {
         const req = await fetch(bnb);
         return await req.json();
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export async function belinvestCurrency() {
+        try {
+        const req = await fetch('https://ibank.belinvestbank.by/api/groupCourses.php');
+        const exchangeRatesXML = await req.buffer();
+
+        const decodedData = iconv.decode(Buffer.from(exchangeRatesXML), 'cp1251').toString()
+        return await parser.parseStringPromise(decodedData);
     } catch (e) {
         console.log(e);
     }
