@@ -128,11 +128,12 @@ export async function bnbCurrency() {
 }
 
 export async function belinvestCurrency() {
-        try {
+    try {
         const req = await fetch('https://ibank.belinvestbank.by/api/groupCourses.php');
-        const exchangeRatesXML = await req.buffer();
+        const exchangeRatesXML = await req.arrayBuffer();
 
-        const decodedData = iconv.decode(Buffer.from(exchangeRatesXML), 'cp1251').toString()
+        const decodedData = iconv.decode(Buffer.from(exchangeRatesXML), 'cp1251').toString();
+        
         return await parser.parseStringPromise(decodedData);
     } catch (e) {
         console.log(e);

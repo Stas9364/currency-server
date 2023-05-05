@@ -1,6 +1,7 @@
 import cron from "node-cron";
 
 import { redisSetter } from "../state/redis-db.js";
+
 import rrbData from "../services/rrb.js";
 import absolutData from "../services/absolut.js";
 import dabrabytData from "../services/dabrabyt.js";
@@ -12,7 +13,9 @@ import paritetData from "../services/paritet.js";
 import bnbData from "../services/bnb.js";
 import technoData from "../services/techno.js";
 
+
 import * as request from "../bank-data-requests.js";
+import belinvestData from "../services/belinvest.js";
 
 // cron.schedule("*/2 * * * * ", () => {
 //     console.log(999)
@@ -28,11 +31,12 @@ export default async function currencyRequest() {
         request.belarusBCurrency(),
         request.paritetCurrency(),
         request.bnbCurrency(),
-        request.technoCurrency()
+        request.technoCurrency(),
+        request.belinvestCurrency()
     ];
 
     Promise.all(requests)
-        .then(([belapb, rrb, dabrabyt, belarusB, paritet, bnb, techno, vtb, absolut, alfa]) => {
+        .then(([belapb, rrb, dabrabyt, belarusB, paritet, bnb, techno, belinvest, vtb, absolut, alfa]) => {
 
             const result = {
                 belapb: belapbData(belapb),
@@ -41,7 +45,8 @@ export default async function currencyRequest() {
                 dabrabyt: dabrabytData(dabrabyt),
                 paritet: paritetData(paritet),
                 bnb: bnbData(bnb),
-                techno: technoData(techno)
+                techno: technoData(techno),
+                belinvest: belinvestData(belinvest)
             };
 
             redisSetter(result)
