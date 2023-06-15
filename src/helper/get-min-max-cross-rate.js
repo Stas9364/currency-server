@@ -1,4 +1,4 @@
-export default function getMiniMaxcurrencyencyRate(data) {
+export default function getMiniMaxCrossRate(data) {
 
     return {
         ...usdData(data)
@@ -6,24 +6,40 @@ export default function getMiniMaxcurrencyencyRate(data) {
 }
 
 const banks = [
-    'belapb', 'belarus', 'bnb',
-    'dabrabyt', 'paritet', 'rrb',
-    'techno', 'belinvest'
+    'belarus',
+    'techno',
+    'dabrabyt',
+    'rrb',
+    'bnb',
+    'belinvest',
+    'paritet',
+    'belapb'
 ];
 
 function usdData(data) {
     const currArr = [
-        'USD', 'EUR', 'RUB',
-        'CNY', 'PLN', 'GBP',
-        'CAD', 'CZK', 'JPY',
-        'SEK', 'CHF', 'UAH',
-        'GEL'
+        'USD_EUR',
+        'USD_RUB',
+        'USD_CHF',
+        'USD_UAH',
+        'USD_PLN',
+
+        'RUB_EUR',
+
+        'CNY_EUR',
+        'CNY_USD',
+        'CNY_RUB',
+
+        'EUR_RUB',
+        'EUR_USD',
+
+        'GBP_USD',
     ];
 
     const minMaxRates = {};
     currArr.forEach((c) => minMaxRates[c] = {
         maxBuy: 0,
-        minSale: 100,
+        minSale: 1000,
         maxRates: [],
         minRates: [],
         maxArr: [],

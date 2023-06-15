@@ -1,5 +1,5 @@
-import CurrencyData from "../bank-data-stucture/currency-data-model.js";
-import RateData from "../bank-data-stucture/rate-data-model.js";
+import CurrencyData from "../../bank-data-stucture/currency-data-model.js";
+import RateData from "../../bank-data-stucture/rate-data-model.js";
 
 export default function belinvestData(data) {
     const elements = data['IFX']['BankSvcRs'][0]['ForExRateInqRs'];

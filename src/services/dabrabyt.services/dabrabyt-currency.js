@@ -1,4 +1,4 @@
-import CurrencyData from "../bank-data-stucture/currency-data-model.js";
+import CurrencyData from "../../bank-data-stucture/currency-data-model.js";
 
 export default function dabrabytData(data) {
     const arr = [];

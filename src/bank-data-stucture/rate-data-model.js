@@ -6,3 +6,12 @@ export default class RateData {
         this.scale = scale;
     }
 }
+
+export class CrossData {
+    constructor(iso1, iso2, buy, sale) {
+        this.iso1 = iso1;
+        this.iso2 = iso2;
+        this.buy = buy;
+        this.sale = sale;
+    }
+}

@@ -13,11 +13,13 @@ const belarusB = 'https://belarusbank.by/api/kursExchange';
 const alfa = 'https://developerhub.alfabank.by:8273/partner/1.0.0/public/rates';
 const belapb = {
     currency: 'https://belapb.by/CashExRatesDaily.php',
-    departments: 'https://belapb.by/ExBanks.php'
+    departments: 'https://belapb.by/ExBanks.php',
+    cross: 'https://belapb.by/CashConvRatesDaily.php?ondate'
 };
 const paitet = 'https://www.paritetbank.by/api/v3/branches/';
 const bnb = 'https://bnb-api.bnb.by/api/v1/info/full/';
 const techno = 'https://tb.by/mob_courses.php';
+const belinvest = 'https://ibank.belinvestbank.by/api/groupCourses.php';
 
 export async function technoCurrency() {
     try {
@@ -94,6 +96,10 @@ export async function belapbCurrency() {
         const exchangeRatesXMLCurr = await reqCurr.text();
         const currencies = await parser.parseStringPromise(exchangeRatesXMLCurr); //currency JSON
 
+        const reqCross= await fetch(belapb.cross);
+        const exchangeRatesXMLCross = await reqCross.text();
+        const cross = await parser.parseStringPromise(exchangeRatesXMLCross); //cross JSON
+
         const reqDep = await fetch(belapb.departments);
         const exchangeRatesXMLDep = await reqDep.text();
         const departments = await parser.parseStringPromise(exchangeRatesXMLDep); //departments JSON
@@ -103,7 +109,7 @@ export async function belapbCurrency() {
                 return el.BankType[0] === 'Точки продаж';
             });
 
-        return { currencies, filteredDepartments };
+        return { currencies, filteredDepartments, cross };
     } catch (e) {
         console.log(e);
     }
@@ -129,7 +135,7 @@ export async function bnbCurrency() {
 
 export async function belinvestCurrency() {
     try {
-        const req = await fetch('https://ibank.belinvestbank.by/api/groupCourses.php');
+        const req = await fetch(belinvest);
         const exchangeRatesXML = await req.arrayBuffer();
 
         const decodedData = iconv.decode(Buffer.from(exchangeRatesXML), 'cp1251').toString();
